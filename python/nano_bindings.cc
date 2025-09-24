@@ -24,6 +24,7 @@ void process_image(RGB8Image data) {
     throw std::runtime_error("Input array must be a 3D image.");
   }
   std::cout << "Processing image of shape (" << data.shape(0) << ", " << data.shape(1) << ")" << std::endl;
+  procObj.procRGB8ToYUV420();
 }
 
 NB_MODULE(nano_ext, m) {
