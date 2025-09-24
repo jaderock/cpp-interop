@@ -1,4 +1,5 @@
 load("@pybind11_bazel//:build_defs.bzl", "pybind_extension")
+load("@nanobind_bazel//:build_defs.bzl", "nanobind_extension", "nanobind_stubgen")
 
 cc_library(
     name = "py-cpp-lib",
@@ -28,5 +29,27 @@ py_binary(
     main = "pb_main.py",
     deps = [
         ":pb_ext_lib",
+    ],
+)
+
+nanobind_extension(
+    name = "nano_ext",
+    srcs = ["nano_bindings.cc"],
+    # Add any necessary C++ dependencies here, e.g., if you're using other libraries
+    deps = [":py-cpp-lib"],
+)
+
+py_library(
+    name = "nano_ext_lib",
+    data = [":nano_ext"],
+    imports = ["."],
+)
+
+py_binary(
+    name = "nano-app",
+    srcs = ["nano_main.py"],
+    main = "nano_main.py",
+    deps = [
+        ":nano_ext_lib",
     ],
 )

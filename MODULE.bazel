@@ -9,4 +9,5 @@ bazel_dep(name = "rules_python", version = "1.6.3")
 
 # Python
 bazel_dep(name = "pybind11_bazel", version = "2.13.6")
-bazel_dep(name = "nanobind", version = "2.4.0")
+#bazel_dep(name = "nanobind", version = "2.4.0")
+bazel_dep(name = "nanobind_bazel", version = "2.9.2")
