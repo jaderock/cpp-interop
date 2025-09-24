@@ -1,0 +1,32 @@
+load("@pybind11_bazel//:build_defs.bzl", "pybind_extension")
+
+cc_library(
+    name = "py-cpp-lib",
+    srcs = ["py_cpp_lib.cc"],
+    hdrs = ["py_cpp_lib.h"],
+    visibility = ["//visibility:public"],
+)
+
+pybind_extension(
+    name = "pb_extension",
+    srcs = ["pb_bindings.cc"],
+    deps = [
+        ":py-cpp-lib",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+py_library(
+    name = "pb_ext_lib",
+    data = [":pb_extension"],
+    imports = ["."],
+)
+
+py_binary(
+    name = "pb-app",
+    srcs = ["pb_main.py"],
+    main = "pb_main.py",
+    deps = [
+        ":pb_ext_lib",
+    ],
+)
