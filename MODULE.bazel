@@ -11,3 +11,14 @@ bazel_dep(name = "rules_python", version = "1.6.3")
 # Python
 bazel_dep(name = "pybind11_bazel", version = "2.13.6")
 bazel_dep(name = "nanobind_bazel", version = "2.9.2")
+
+#python = use_extension("@rules_python//python/extensions:python.bzl", "python")
+#python.toolchain(python_version = "3.11") # Or your desired Python version.
+
+pip = use_extension("@rules_python//python/extensions:pip.bzl", "pip")
+pip.parse(
+    hub_name = "pypi",
+    requirements_lock = "//python:requirements.txt",
+    python_version = "3.11",
+)
+use_repo(pip, "pypi")

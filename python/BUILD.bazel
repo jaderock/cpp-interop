@@ -1,5 +1,6 @@
 load("@pybind11_bazel//:build_defs.bzl", "pybind_extension")
 load("@nanobind_bazel//:build_defs.bzl", "nanobind_extension", "nanobind_stubgen")
+load("@pypi//:requirements.bzl", "requirement")
 
 cc_library(
     name = "py-cpp-lib",
@@ -51,5 +52,6 @@ py_binary(
     main = "nano_main.py",
     deps = [
         ":nano_ext_lib",
+        requirement("numpy"),
     ],
 )
