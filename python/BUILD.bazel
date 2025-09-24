@@ -2,18 +2,11 @@ load("@pybind11_bazel//:build_defs.bzl", "pybind_extension")
 load("@nanobind_bazel//:build_defs.bzl", "nanobind_extension", "nanobind_stubgen")
 load("@pypi//:requirements.bzl", "requirement")
 
-cc_library(
-    name = "py-cpp-lib",
-    srcs = ["py_cpp_lib.cc"],
-    hdrs = ["py_cpp_lib.h"],
-    visibility = ["//visibility:public"],
-)
-
 pybind_extension(
     name = "pb_extension",
     srcs = ["pb_bindings.cc"],
     deps = [
-        ":py-cpp-lib",
+        "//common:common-cpp-lib",
     ],
     visibility = ["//visibility:public"],
 )
@@ -38,7 +31,7 @@ nanobind_extension(
     name = "nano_ext",
     srcs = ["nano_bindings.cc"],
     # Add any necessary C++ dependencies here, e.g., if you're using other libraries
-    deps = [":py-cpp-lib"],
+    deps = ["//common:common-cpp-lib"],
 )
 
 py_library(
