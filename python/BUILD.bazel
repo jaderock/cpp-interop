@@ -30,6 +30,7 @@ py_binary(
     main = "pb_main.py",
     deps = [
         ":pb_ext_lib",
+        requirement("numpy"),
     ],
 )
 
