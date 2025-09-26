@@ -2,4 +2,5 @@
 Interoperation examples between C++ and other languages with Bazel build system.
 
 # Build
-Bazel ver 8.3.1
+
+[Bazel v8.4.1](https://github.com/bazelbuild/bazel/releases/tag/8.4.1)
